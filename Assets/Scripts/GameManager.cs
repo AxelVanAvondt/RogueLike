@@ -18,12 +18,26 @@ public class GameManager : MonoBehaviour
         }
     }
     public List<Actor> Enemies = new List<Actor>();
-
+    public Actor Player { get; set; }
     public static GameManager Get { get => instance; }
 
     public Actor GetActorAtLocation(Vector3 location)
     {
-        return null;
+        if(location == Player.transform.position)
+        {
+            return Player;
+        }
+        else
+        {
+            foreach(Actor enemy in Enemies)
+            {
+                if(location == enemy.transform.position)
+                {
+                    return enemy;
+                }
+            }
+            return null;
+        }
     }
     public GameObject CreateActor(string name, Vector2 position)
     {
@@ -34,5 +48,12 @@ public class GameManager : MonoBehaviour
     public void AddEnemy(Actor enemy)
     {
         Enemies.Add(enemy);
+    }
+    public void StartEnemyTurn()
+    {
+        foreach(var enemy in Enemies)
+        {
+            enemy.GetComponent<Enemy>().RunAI();
+        }
     }
 }
