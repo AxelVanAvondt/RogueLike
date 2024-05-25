@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
             return null;
         }
     }
-    public GameObject CreateActor(string name, Vector2 position)
+    public GameObject CreateGameObject(string name, Vector2 position)
     {
         GameObject actor = Instantiate(Resources.Load<GameObject>($"Prefabs/{name}"), new Vector3(position.x + 0.5f, position.y + 0.5f, 0), Quaternion.identity);
         actor.name = name;
@@ -55,5 +55,9 @@ public class GameManager : MonoBehaviour
         {
             enemy.GetComponent<Enemy>().RunAI();
         }
+    }
+    public void RemoveEnemy(Actor enemy)
+    {
+        Enemies.Remove(enemy);
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1806794225440700755}
   - component: {fileID: 9027743338936845806}
   - component: {fileID: 6415032466994800728}
+  - component: {fileID: 6478209106529172263}
   m_Layer: 0
   m_Name: DragonBF
   m_TagString: Untagged
@@ -98,6 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd46e2c4391b8c64b9f375f0f2c9890b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHitPoints: 8
+  hitPoints: 8
+  defense: 0
+  power: 3
   FieldOfView: []
   FieldOfViewRange: 8
 --- !u!114 &6415032466994800728
@@ -110,5 +115,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65a0dfffb184bac4bb844b1c3959904c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6478209106529172263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4421143684982380265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af028bd8c61434a4f8119d19adbf4b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

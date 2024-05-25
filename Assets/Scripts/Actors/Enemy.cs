@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     {
         Vector3Int gridPosition = MapManager.Get.FloorMap.WorldToCell(transform.position);
         Vector2 direction = algorithm.Compute((Vector2Int)gridPosition, (Vector2Int)targetPosition);
-        Action.Move(GetComponent<Actor>(), direction);
+        Action.MoveOrHit(GetComponent<Actor>(), direction);
     }
     public void RunAI()
     {
@@ -42,6 +42,15 @@ public class Enemy : MonoBehaviour
                 IsFighting = true;
             }
             // TODO: call MoveAlongPath with the gridPosition
+            MoveAlongPath(gridPosition);
+        }
+        float distance = Vector3.Distance(this.transform.position, target.transform.position);
+        if(distance < 1.5f)
+        {
+            Action.Hit(GetComponent<Actor>(), target);
+        }
+        else
+        {
             MoveAlongPath(gridPosition);
         }
     }

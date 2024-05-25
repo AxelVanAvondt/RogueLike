@@ -98,6 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd46e2c4391b8c64b9f375f0f2c9890b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHitPoints: 30
+  hitPoints: 30
+  defense: 2
+  power: 4
   FieldOfView: []
   FieldOfViewRange: 8
 --- !u!114 &4288702088314335506

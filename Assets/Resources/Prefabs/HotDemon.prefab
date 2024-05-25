@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 862394589839507254}
   - component: {fileID: 4827561904246778646}
   - component: {fileID: 4949042354971698144}
+  - component: {fileID: 7734778810501132373}
   m_Layer: 0
   m_Name: HotDemon
   m_TagString: Untagged
@@ -98,6 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd46e2c4391b8c64b9f375f0f2c9890b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHitPoints: 16
+  hitPoints: 16
+  defense: 1
+  power: 4
   FieldOfView: []
   FieldOfViewRange: 8
 --- !u!114 &4949042354971698144
@@ -110,5 +115,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65a0dfffb184bac4bb844b1c3959904c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7734778810501132373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650434133874886775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af028bd8c61434a4f8119d19adbf4b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
