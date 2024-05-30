@@ -8,8 +8,13 @@ public class DungeonGenerator : MonoBehaviour
     private int maxRoomSize, minRoomSize;
     private int maxRooms;
     private int maxEnemies;
+    private int maxItems;
     List<Room> rooms = new List<Room>();
 
+    public void SetMaxItems(int hehe)
+    {
+        maxItems = hehe;
+    }
     public void SetSize(int width, int height)
     {
         this.width = width;
@@ -80,6 +85,7 @@ public class DungeonGenerator : MonoBehaviour
                 TunnelBetween(rooms[rooms.Count - 1], room);
             }
             PlaceEnemies(room, maxEnemies);
+            PlaceItems(room, maxItems);
             rooms.Add(room);
         }
         var player = GameManager.Get.CreateGameObject("Player", rooms[0].Center());
@@ -170,6 +176,32 @@ public class DungeonGenerator : MonoBehaviour
             else
             {
                 GameManager.Get.CreateGameObject("DragonBF", new Vector2(x, y));
+            }
+        }
+    }
+    private void PlaceItems(Room room, int MaxItems)
+    {
+        // the number of items we want 
+        int num = Random.Range(0, MaxItems + 1);
+
+        for (int counter = 0; counter < num; counter++)
+        {
+            // The borders of the room are walls, so add and substract by 1 
+            int x = Random.Range(room.X + 1, room.X + room.Width - 1);
+            int y = Random.Range(room.Y + 1, room.Y + room.Height - 1);
+
+            // create different items 
+            if (Random.value < 0.33f)
+            {
+                GameManager.Get.CreateGameObject("Fireball", new Vector2(x, y));
+            }
+            else if (Random.value < 0.66f)
+            {
+                GameManager.Get.CreateGameObject("HealthPotion", new Vector2(x, y));
+            }
+            else
+            {
+                GameManager.Get.CreateGameObject("ScrollOfConfusion", new Vector2(x, y));
             }
         }
     }

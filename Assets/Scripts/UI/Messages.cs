@@ -11,7 +11,7 @@ public class Messages : MonoBehaviour
     void Start()
     {
         root = GetComponent<UIDocument>().rootVisualElement;
-        for(int i = 0; i < labels.Length; i++)
+        for(int i = 1; i < labels.Length; i++)
         {
             labels[i] = root.Q<Label>($"Label{i}");
         }
@@ -20,14 +20,14 @@ public class Messages : MonoBehaviour
     }
     public void Clear()
     {
-        for(int i = 0;i < labels.Length;i++)
+        for(int i = 1;i < labels.Length;i++)
         {
             labels[i].text = string.Empty;
         }
     }
     public void MoveUp()
     {
-        for (int i = 0; i < labels.Length; i++)
+        for (int i = 1; i < labels.Length - 1; i++)
         {
             labels[i + 1].text = labels[i].text;
             labels[i + 1].style.color = labels[i].style.color;
@@ -36,8 +36,8 @@ public class Messages : MonoBehaviour
     public void AddMessage(string content, Color color)
     {
         MoveUp();
-        labels[0].text = content;
-        labels[0].style.color = color;
+        labels[1].text = content;
+        labels[1].style.color = color;
     }
 
     // Update is called once per frame

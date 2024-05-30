@@ -30,28 +30,28 @@ public class Enemy : MonoBehaviour
             target = GameManager.Get.Player;
         }
         // TODO: convert the position of the target to a gridPosition
-        Grid gp = target.transform.GetComponent<Grid>();
-        Vector3Int gridPosition = gp.WorldToCell(transform.position);
+        var gridPosition = MapManager.Get.FloorMap.WorldToCell(target.transform.position);
 
         // First check if already fighting, because the FieldOfView check costs more cpu
         if (IsFighting || GetComponent<Actor>().FieldOfView.Contains(gridPosition))
         {
             // TODO: If the enemy was not fighting, is should be fighting now
-            if(IsFighting == false)
+            if (IsFighting == false)
             {
                 IsFighting = true;
             }
             // TODO: call MoveAlongPath with the gridPosition
-            MoveAlongPath(gridPosition);
-        }
-        float distance = Vector3.Distance(this.transform.position, target.transform.position);
-        if(distance < 1.5f)
-        {
-            Action.Hit(GetComponent<Actor>(), target);
-        }
-        else
-        {
-            MoveAlongPath(gridPosition);
+           
+
+            float distance = Vector3.Distance(this.transform.position, target.transform.position);
+            if (distance < 1.5f)
+            {
+                Action.Hit(GetComponent<Actor>(), target);
+            }
+            else
+            {
+                MoveAlongPath(gridPosition);
+            }
         }
     }
 

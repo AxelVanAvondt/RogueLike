@@ -55,7 +55,7 @@ public class Actor : MonoBehaviour
     {
         if (GetComponent<Player>())
         {
-            UIManager.Get.AddMessage("You Died!", Color.red);
+            UIManager.Get.AddMessage("You Died! Idiot!", Color.red);
             GameObject grave = GameManager.Get.CreateGameObject("Dead", this.transform.position);
             grave.name = $"Remains of {this.name}";
         }
@@ -64,7 +64,7 @@ public class Actor : MonoBehaviour
             UIManager.Get.AddMessage($"{this.name} is dead!", Color.green);
             GameManager.Get.RemoveEnemy(this);
         }
-        GameObject.Destroy(this);
+        GameObject.Destroy(this.gameObject);
     }
     public void DoDamage(int hp)
     {

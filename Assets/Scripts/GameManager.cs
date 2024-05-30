@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public Actor Player { get; set; }
     public static GameManager Get { get => instance; }
 
+    public List<Consumable> Items = new List<Consumable>();
+
     public Actor GetActorAtLocation(Vector3 location)
     {
         if(location == Player.transform.position)
@@ -59,5 +61,25 @@ public class GameManager : MonoBehaviour
     public void RemoveEnemy(Actor enemy)
     {
         Enemies.Remove(enemy);
+    }
+
+    public void AddItem(Consumable item)
+    {
+        Items.Add(item);
+    }
+    public void RemoveItem(Consumable item)
+    {
+        Items.Remove(item);
+    }
+    public Consumable GetItemAtLocation(Vector3 location)
+    {
+        foreach (Consumable item in Items)
+        {
+            if (location == item.transform.position)
+            {
+                return item;
+            }
+        }
+        return null;
     }
 }
