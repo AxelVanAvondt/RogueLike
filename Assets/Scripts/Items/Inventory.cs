@@ -7,17 +7,18 @@ public class Inventory : MonoBehaviour
     public List<Consumable> Items = new List<Consumable>();
     public int MaxItems;
 
-    public bool AddItem(Consumable item)
+    public void AddItem(Consumable item)
     {
-        if(Items.Count < MaxItems)
-        {
-            Items.Add(item);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        //if(Items.Count < MaxItems)
+        //{
+        //    Items.Add(item);
+        //    return true;
+        //}
+        //else
+        //{
+        //    return false;
+        //}
+        Items.Add(item);
     }
     public void DropItem(Consumable item)
     {

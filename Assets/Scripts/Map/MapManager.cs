@@ -62,6 +62,7 @@ public class MapManager : MonoBehaviour
         generator.SetRoomSize(roomMinSize, roomMaxSize);
         generator.SetMaxRooms(maxRooms);
         generator.SetMaxEnemies(maxEnemies);
+        generator.SetMaxItems(maxItems);
         generator.Generate();
 
         AddTileMapToDictionary(FloorMap);

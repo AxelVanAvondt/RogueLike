@@ -21,8 +21,8 @@ public class UIManager : MonoBehaviour
     [Header("Documents")]
     public HealthBar healthBar;
     public Messages messages;
-
-
+    public GameObject inventory;
+    public InventoryUI Inventory { get { return inventory.GetComponent<InventoryUI>(); } }
     public void UpdateHealth(int current, int max)
     {
         healthBar.GetComponent<HealthBar>().SetValues(current, max);

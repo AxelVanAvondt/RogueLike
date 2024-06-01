@@ -82,4 +82,24 @@ public class GameManager : MonoBehaviour
         }
         return null;
     }
+    public List<Actor> GetNearbyEnemies(Vector3 location)
+    {
+        List<Actor> nearbyEnemies = new List<Actor>();
+
+        // Find all colliders within the specified radius
+        Collider[] hitColliders = Physics.OverlapSphere(location, 5);
+
+        foreach (Collider hitCollider in hitColliders)
+        {
+            // Check if the collider's game object has the Actor component
+            Actor actor = hitCollider.GetComponent<Actor>();
+            if (actor != null)
+            {
+                // Add the actor to the list of nearby enemies
+                nearbyEnemies.Add(actor);
+            }
+        }
+
+        return nearbyEnemies;
+    }
 }

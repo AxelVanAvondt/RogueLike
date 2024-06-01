@@ -79,4 +79,22 @@ public class Actor : MonoBehaviour
             UIManager.Get.UpdateHealth(hitPoints, maxHitPoints);
         }
     }
+    public void Heal(int hp)
+    {
+        hitPoints += hp;
+        if(hitPoints > maxHitPoints)
+        {
+            hitPoints = maxHitPoints;
+        }
+        if(GetComponent<Player>())
+        {
+            int ihp = hp;
+            UIManager.Get.UpdateHealth(hitPoints, maxHitPoints);
+            if(hitPoints + hp > maxHitPoints)
+            {
+                ihp = maxHitPoints - hitPoints;
+            }
+            UIManager.Get.AddMessage($"You health increased by {ihp}... I literally don't care", Color.green);
+        }
+    }
 }

@@ -10,6 +10,12 @@ public class Enemy : MonoBehaviour
     public Actor target { get; set; }
     public bool IsFighting { get; set; }
     public AStar algorithm { get; set; }
+
+    public int confused = 0;
+    public void Confuse()
+    {
+        confused = 8;
+    }
     // Start is called before the first frame update
     private void Start()
     {
@@ -24,33 +30,39 @@ public class Enemy : MonoBehaviour
     }
     public void RunAI()
     {
-        // TODO: If target is null, set target to player (from gameManager)
-        if(target  == null)
+        if(confused > 0)
         {
-            target = GameManager.Get.Player;
+            UIManager.Get.AddMessage($"The {gameObject.name} is confused and cannot act", Color.red);
         }
-        // TODO: convert the position of the target to a gridPosition
-        var gridPosition = MapManager.Get.FloorMap.WorldToCell(target.transform.position);
-
-        // First check if already fighting, because the FieldOfView check costs more cpu
-        if (IsFighting || GetComponent<Actor>().FieldOfView.Contains(gridPosition))
+        else
         {
-            // TODO: If the enemy was not fighting, is should be fighting now
-            if (IsFighting == false)
+            // TODO: If target is null, set target to player (from gameManager)
+            if (target == null)
             {
-                IsFighting = true;
+                target = GameManager.Get.Player;
             }
-            // TODO: call MoveAlongPath with the gridPosition
-           
+            // TODO: convert the position of the target to a gridPosition
+            var gridPosition = MapManager.Get.FloorMap.WorldToCell(target.transform.position);
 
-            float distance = Vector3.Distance(this.transform.position, target.transform.position);
-            if (distance < 1.5f)
+            // First check if already fighting, because the FieldOfView check costs more cpu
+            if (IsFighting || GetComponent<Actor>().FieldOfView.Contains(gridPosition))
             {
-                Action.Hit(GetComponent<Actor>(), target);
-            }
-            else
-            {
-                MoveAlongPath(gridPosition);
+                // TODO: If the enemy was not fighting, is should be fighting now
+                if (IsFighting == false)
+                {
+                    IsFighting = true;
+                }
+                // TODO: call MoveAlongPath with the gridPosition
+
+                float distance = Vector3.Distance(this.transform.position, target.transform.position);
+                if (distance < 1.5f)
+                {
+                    Action.Hit(GetComponent<Actor>(), target);
+                }
+                else
+                {
+                    MoveAlongPath(gridPosition);
+                }
             }
         }
     }
