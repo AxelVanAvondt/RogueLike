@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
         if(confused > 0)
         {
             UIManager.Get.AddMessage($"The {gameObject.name} is confused and cannot act", Color.red);
+            confused--;
         }
         else
         {

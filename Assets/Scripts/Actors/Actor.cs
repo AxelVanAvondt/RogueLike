@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,12 +11,18 @@ public class Actor : MonoBehaviour
     [SerializeField] private int hitPoints;
     [SerializeField] private int defense;
     [SerializeField] private int power;
+    [SerializeField] private int level;
+    [SerializeField] private int Xp;
+    [SerializeField] private int xpToNextLevel;
 
 
     public int MaxHitPoints {  get { return maxHitPoints; } }
     public int HitPoints { get { return hitPoints; } }
     public int Defense { get { return defense; } }
     public int Power { get { return power; } }
+    public int Level { get { return level; } }
+    public int XP { get { return Xp; } }
+    public int XPToNextLevel { get { return xpToNextLevel; } }
 
     private AdamMilVisibility algorithm;
     public List<Vector3Int> FieldOfView = new List<Vector3Int>();
@@ -28,6 +35,8 @@ public class Actor : MonoBehaviour
         if (GetComponent<Player>())
         {
             UIManager.Get.UpdateHealth(hitPoints, maxHitPoints);
+            UIManager.Get.UpdateLevel(1);
+            UIManager.Get.UpdateXP(0);
         }
     }
 
@@ -59,20 +68,24 @@ public class Actor : MonoBehaviour
             GameObject grave = GameManager.Get.CreateGameObject("Dead", this.transform.position);
             grave.name = $"Remains of {this.name}";
         }
-        else if (GetComponent<Enemy>())
+        if (GetComponent<Enemy>())
         {
             UIManager.Get.AddMessage($"{this.name} is dead!", Color.green);
             GameManager.Get.RemoveEnemy(this);
         }
-        GameObject.Destroy(this.gameObject);
+        Destroy(gameObject);
     }
-    public void DoDamage(int hp)
+    public void DoDamage(int hp, Actor attacker)
     {
         hitPoints -= hp;
         if(hitPoints <= 0)
         {
             hitPoints = 0;
             Die();
+            if (attacker.GetComponent<Player>())
+            {
+                attacker.AddXp(Xp);
+            }
         }
         if(GetComponent<Player>())
         {
@@ -96,5 +109,21 @@ public class Actor : MonoBehaviour
             }
             UIManager.Get.AddMessage($"You health increased by {ihp}... I literally don't care", Color.green);
         }
+    }
+    public void AddXp(int xp)
+    {
+        Xp += xp;
+        if (Xp >= xpToNextLevel)
+        {
+            Xp = 0;
+            level++;
+            xpToNextLevel = (int)Math.Round(xpToNextLevel * 1.3);
+            maxHitPoints += 5;
+            defense += 2;
+            power += 2;
+            UIManager.Get.AddMessage("Dear Player, \nIt seems like you gained a level... Well done. \nLove, The Game", Color.blue);
+        }
+        UIManager.Get.UpdateXP(Xp);
+        UIManager.Get.UpdateLevel(level);
     }
 }

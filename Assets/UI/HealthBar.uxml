@@ -2,7 +2,11 @@
     <ui:VisualElement style="flex-grow: 1; position: absolute; left: 25px; bottom: 25px;">
         <ui:VisualElement style="flex-grow: 1; align-items: center; background-color: rgb(255, 0, 0); width: 117px;">
             <ui:VisualElement name="HealthBar" style="flex-grow: 1; background-color: rgb(0, 255, 0); position: absolute; left: 0; top: 0; bottom: 0; width: 100%;" />
-            <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HealthLabel" />
+            <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HealthLabel" style="-unity-font-style: bold;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1;">
+            <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Level" style="height: 15px; -unity-text-align: middle-left; color: rgb(0, 255, 88);" />
+            <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="XP" style="height: 15px; -unity-text-align: middle-left; color: rgb(0, 204, 255);" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

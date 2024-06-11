@@ -15,6 +15,23 @@ public class Player : MonoBehaviour, Controls.IPlayerActions
     private void Awake()
     {
         controls = new Controls();
+        UpDown();
+        //Up and down
+    }
+    private void UpDown()
+    {
+        Ladder lad = GameManager.Get.GetLadderAtLocation(this.transform.position);
+        if(lad != null )
+        {
+            if (lad.Up == true)
+            {
+                MapManager.Get.MoveUp();
+            }
+            if (lad.Up == false)
+            {
+                MapManager.Get.MoveDown();
+            }
+        }
     }
 
     private void Start()
@@ -41,11 +58,11 @@ public class Player : MonoBehaviour, Controls.IPlayerActions
         Vector2 direction = controls.Player.Movement.ReadValue<Vector2>();
         if (context.performed)
         {
-            if(direction.y > 0)
+            if(inventoryIsOpen == true && direction.y > 0)
             {
                 UIManager.Get.Inventory.SelectNextItem();
             }
-            if (direction.y < 0)
+            if(inventoryIsOpen == true && direction.y < 0)
             {
                 UIManager.Get.Inventory.SelectPreviousItem();
             }
@@ -168,7 +185,7 @@ public class Player : MonoBehaviour, Controls.IPlayerActions
             List<Actor> enemies = GameManager.Get.GetNearbyEnemies(transform.position);
             foreach(Actor enemy in enemies)
             {
-                enemy.DoDamage(10);
+                enemy.DoDamage(10, GetComponent<Actor>());
             }
             UIManager.Get.AddMessage("I HOPE YOU DIE IN A FIRE", Color.green);
         }

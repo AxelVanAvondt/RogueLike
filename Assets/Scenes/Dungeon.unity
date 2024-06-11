@@ -167,6 +167,7 @@ MonoBehaviour:
   maxRooms: 30
   maxEnemies: 2
   maxItems: 2
+  floor: 0
 --- !u!156049354 &408639669
 Grid:
   m_ObjectHideFlags: 0
@@ -350,6 +351,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9634c9b692c9148a74d1905ad4e93c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &738962684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 738962685}
+  - component: {fileID: 738962686}
+  - component: {fileID: 738962687}
+  m_Layer: 0
+  m_Name: FloorInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &738962685
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738962684}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1586972450}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &738962686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738962684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c3abf36fc29003438b4b13219829bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &738962687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738962684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 36c60c5c6e9ed304fa6821527feeb8c1, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: e6126409693f7384aafa0aed956ed737, type: 3}
+  m_SortingOrder: 0
 --- !u!1 &958713286
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +729,7 @@ Transform:
   - {fileID: 1821461668}
   - {fileID: 588084706}
   - {fileID: 958713288}
+  - {fileID: 738962685}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1586972451
@@ -684,6 +747,7 @@ MonoBehaviour:
   healthBar: {fileID: 1821461670}
   messages: {fileID: 588084708}
   inventory: {fileID: 958713286}
+  floorInfo: {fileID: 738962686}
 --- !u!1 &1684302753
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,6 +779,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemies: []
   Items: []
+  Ladders: []
+  Tombstones: []
 --- !u!4 &1684302755
 Transform:
   m_ObjectHideFlags: 0

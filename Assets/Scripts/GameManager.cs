@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Net.Http.Headers;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -16,12 +18,40 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        savePath = Application.persistentDataPath + "/Player.json";
+        if (Player != null)
+        {
+            LoadPlayer(Player);
+        }
     }
+    private string savePath;
+
     public List<Actor> Enemies = new List<Actor>();
     public Actor Player { get; set; }
     public static GameManager Get { get => instance; }
 
     public List<Consumable> Items = new List<Consumable>();
+    public List<Ladder> Ladders = new List<Ladder>();
+    public List<Tombstone> Tombstones = new List<Tombstone>();
+
+    public void SavePlayer(Actor player)
+    {
+        string json = JsonUtility.ToJson(player);
+        File.WriteAllText(savePath, json);
+    }
+    public void LoadPlayer(Actor player)
+    {
+        if(File.Exists(savePath))
+        {
+            string json = File.ReadAllText(savePath);
+            JsonUtility.FromJsonOverwrite(json, player);
+        }
+    }
+    private void OnApplicationQuit()
+    {
+        SavePlayer(Player);
+    }
 
     public Actor GetActorAtLocation(Vector3 location)
     {
@@ -50,6 +80,7 @@ public class GameManager : MonoBehaviour
     public void AddEnemy(Actor enemy)
     {
         Enemies.Add(enemy);
+        UIManager.Get.UpdateEnemies(Enemies.Count);
     }
     public void StartEnemyTurn()
     {
@@ -61,6 +92,7 @@ public class GameManager : MonoBehaviour
     public void RemoveEnemy(Actor enemy)
     {
         Enemies.Remove(enemy);
+        UIManager.Get.UpdateEnemies(Enemies.Count);
     }
 
     public void AddItem(Consumable item)
@@ -101,5 +133,47 @@ public class GameManager : MonoBehaviour
         }
 
         return nearbyEnemies;
+    }
+    public void AddLadder(Ladder lad)
+    {
+        Ladders.Add(lad);
+    }
+    public Ladder GetLadderAtLocation(Vector3 location)
+    {
+        foreach (Ladder pal in Ladders)
+        {
+            if (location == pal.transform.position)
+            {
+                return pal;
+            }
+        }
+        return null;
+    }
+    public void AddTombStone(Tombstone stone)
+    {
+        Tombstones.Add(stone);
+    }
+    public void ClearFloor()
+    {
+        foreach(Actor frick in Enemies)
+        {
+            Destroy(frick.gameObject);
+        }
+        foreach (Consumable ShutUp in Items)
+        {
+            Destroy(ShutUp.gameObject);
+        }
+        foreach (Ladder Bich in Ladders)
+        {
+            Destroy(Bich.gameObject);
+        }
+        foreach (Tombstone Die in Tombstones)
+        {
+            Destroy(Die.gameObject);
+        }
+        Enemies.Clear();
+        Items.Clear();
+        Ladders.Clear();
+        Tombstones.Clear();
     }
 }

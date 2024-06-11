@@ -46,6 +46,7 @@ public class MapManager : MonoBehaviour
     public int maxRooms = 30;
     public int maxEnemies = 2;
     public int maxItems = 2;
+    public int floor = 0;
 
     private void Start()
     {
@@ -54,6 +55,9 @@ public class MapManager : MonoBehaviour
 
     private void GenerateDungeon()
     {
+        FloorMap.ClearAllTiles();
+        ObstacleMap.ClearAllTiles();
+        FogMap.ClearAllTiles();
         Tiles = new Dictionary<Vector3Int, TileData>();
         VisibleTiles = new List<Vector3Int>();
 
@@ -63,11 +67,26 @@ public class MapManager : MonoBehaviour
         generator.SetMaxRooms(maxRooms);
         generator.SetMaxEnemies(maxEnemies);
         generator.SetMaxItems(maxItems);
+        generator.SetCurrentFloor(floor);
         generator.Generate();
 
         AddTileMapToDictionary(FloorMap);
         AddTileMapToDictionary(ObstacleMap);
         SetupFogMap();
+    }
+    public void MoveUp()
+    {
+        GameManager.Get.ClearFloor();
+        floor++;
+        GenerateDungeon();
+        UIManager.Get.UpdateFloor(floor);
+    }
+    public void MoveDown()
+    {
+        GameManager.Get.ClearFloor();
+        floor--;
+        GenerateDungeon();
+        UIManager.Get.UpdateFloor(floor);
     }
 
     public bool InBounds(int x, int y) => 0 <= x && x < width && 0 <= y && y < height;

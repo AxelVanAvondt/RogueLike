@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DungeonGenerator : MonoBehaviour
@@ -9,8 +10,16 @@ public class DungeonGenerator : MonoBehaviour
     private int maxRooms;
     private int maxEnemies;
     private int maxItems;
+    private int currentFloor;
+    private int frick;
     List<Room> rooms = new List<Room>();
+    List<string> enemies = new List<string>() { "Bob", "Goncalo", "Hanging", "Kevin", "Lapis", "DeathMetal", "Huh", "Humpty Dumpty"};
 
+    public void SetCurrentFloor(int FLOOF)
+    {
+        currentFloor = FLOOF;
+        frick = currentFloor;
+    }
     public void SetMaxItems(int hehe)
     {
         maxItems = hehe;
@@ -89,6 +98,21 @@ public class DungeonGenerator : MonoBehaviour
             rooms.Add(room);
         }
         var player = GameManager.Get.CreateGameObject("Player", rooms[0].Center());
+
+        //I switched the ladders names because it's funny. The ladder that goes up is "Down" and the ladder that goes down is "Up"
+        GameManager.Get.CreateGameObject("Up", rooms[maxRooms].Center());
+        if (player != null)
+        {
+            player.transform.position = new Vector3(rooms[0].Center().x, rooms[0].Center().y);
+        }
+        else
+        {
+            GameManager.Get.CreateGameObject("Player", rooms[0].Center());
+        }
+        if (currentFloor > 0)
+        {
+            GameManager.Get.CreateGameObject("Down", rooms[0].Center());
+        }
     }
 
     private bool TrySetWallTile(Vector3Int pos)
@@ -176,6 +200,13 @@ public class DungeonGenerator : MonoBehaviour
             else
             {
                 GameManager.Get.CreateGameObject("DragonBF", new Vector2(x, y));
+            }
+            int i = 0;
+            if(frick != currentFloor)
+            {
+                frick = currentFloor;
+                GameManager.Get.CreateGameObject(enemies[i], new Vector2(x, y));
+                i++;
             }
         }
     }

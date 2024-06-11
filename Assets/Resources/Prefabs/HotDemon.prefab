@@ -103,6 +103,9 @@ MonoBehaviour:
   hitPoints: 16
   defense: 1
   power: 4
+  level: 1
+  Xp: 10
+  xpToNextLevel: 0
   FieldOfView: []
   FieldOfViewRange: 8
 --- !u!114 &4949042354971698144
@@ -117,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65a0dfffb184bac4bb844b1c3959904c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  confused: 0
 --- !u!114 &7734778810501132373
 MonoBehaviour:
   m_ObjectHideFlags: 0
