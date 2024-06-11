@@ -48,6 +48,13 @@ public class GameManager : MonoBehaviour
             JsonUtility.FromJsonOverwrite(json, player);
         }
     }
+    public void DeleteSave()
+    {
+        if (File.Exists(savePath))
+        {
+            File.Delete(savePath);
+        }
+    }
     private void OnApplicationQuit()
     {
         SavePlayer(Player);

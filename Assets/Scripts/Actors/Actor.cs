@@ -74,6 +74,7 @@ public class Actor : MonoBehaviour
             GameManager.Get.RemoveEnemy(this);
         }
         Destroy(gameObject);
+        GameManager.Get.DeleteSave();
     }
     public void DoDamage(int hp, Actor attacker)
     {
